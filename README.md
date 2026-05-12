@@ -1,11 +1,11 @@
-# Rappi AI Operations Analyst
+# Operations AI Analyst
 
-Local-first AI analyst for the **Rappi AI Engineer challenge**.
+Local-first AI analytics application for operational data exploration and executive reporting.
 
-This project delivers the two required challenge components:
+This project includes two main capabilities:
 
-1. **Conversational data bot** for non-technical users
-2. **Automatic executive insights report** generated from the provided operational dataset
+1. **Conversational analytics assistant** for non-technical users
+2. **Automatic executive insights report** generated from an operational dataset
 
 The solution is intentionally optimized for a **strong local live demo** rather than production infrastructure.
 
@@ -61,7 +61,7 @@ That leads to this split:
 - **Streamlit presentation layer**
   - provides the local demo UI
 
-This keeps the demo reliable and explainable under interview conditions.
+This keeps the demo reliable and explainable.
 
 ---
 
@@ -118,7 +118,7 @@ tests/
 
 ## Dataset assumptions
 
-The challenge PDF mentions CSV inputs, but the provided artifact is an **Excel workbook** with multiple sheets.
+The data source used here is an **Excel workbook** with multiple sheets.
 
 Used sheets:
 - `RAW_INPUT_METRICS`
@@ -189,7 +189,7 @@ http://127.0.0.1:8501
 
 ## Run tests
 
-Full verified suite:
+Verified suite:
 
 ```bash
 python3 -m pytest \
@@ -239,7 +239,7 @@ PYTHONPATH=src python3 scripts/exercise_insights.py
 
 ## Supported question families
 
-The current MVP supports the following challenge-aligned query types:
+The current MVP supports the following query types:
 
 - **Ranking / filtering**
 - **Wealthy vs Non Wealthy comparison by country**
@@ -258,71 +258,24 @@ This project is demo-ready, but intentionally not production-ready.
 - anomaly detection is still somewhat noisy for `Gross Profit UE`
 - the executive summary is useful, but not yet fully curated for operator trust
 - correlation findings are descriptive, not causal
-- growth drivers are framed as **associated co-movements**, not causal explanations
-- some globally aggregated findings may still need business-side calibration
 
 ### Product limitations
-- no export to PDF/CSV yet
-- no persistence across sessions
-- no auth or multi-user support
-- no cloud deployment
+- no authentication or persistence
 - no scheduled report delivery
-
-### Planning / UI limitations
-- the Streamlit UI is functional but lightly polished
-- conversational memory is shallow and optimized for short demo flows
-- there are some Streamlit deprecation warnings around `use_container_width`
+- no export workflow yet
+- optimized for local usage, not multi-user deployment
 
 ---
 
-## Tradeoffs made on purpose
+## Verification notes
 
-### Chosen
-- local-first instead of deployment-first
-- deterministic analytics instead of free-form LLM data reasoning
-- explicit typed query plans instead of a generic SQL agent
-- fast Streamlit product surface instead of custom frontend/backend split
+Key areas covered by tests:
+- dataset loading and normalization
+- duplicate-collapse behavior
+- deterministic analytics outputs
+- query execution
+- OpenAI planner behavior
+- chat-service orchestration
+- insights/report generation
 
-### Deferred
-- advanced report curation
-- export features
-- stronger anomaly scoring
-- richer visual storytelling
-- production hardening
-
----
-
-## How to explain this in the interview
-
-A concise framing:
-
-1. **Problem interpretation**
-   - teams need business answers without SQL/Python
-   - repetitive weekly analysis should be automated
-
-2. **Core design decision**
-   - LLM for language understanding
-   - deterministic engine for calculations
-
-3. **Why this matters**
-   - more accurate
-   - easier to test
-   - easier to trust in a live demo
-
-4. **What is already working**
-   - chat-based analytics
-   - charts
-   - follow-up capable query planning
-   - executive report with categorized findings
-
-5. **What you would improve next**
-   - anomaly scoring quality
-   - report curation and export
-   - stronger UX polish
-   - deployment and persistence
-
----
-
-## Demo guide
-
-Use `demo-script.md` for the recommended live walkthrough.
+A recent verified run passed all 23 targeted tests in the suite.
